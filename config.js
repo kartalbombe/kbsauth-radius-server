@@ -10,7 +10,7 @@ const SSL_CERT_DIRECTORY = path.join(__dirname, './ssl/cert');
 export default {
 	port: 1812,
 	// radius secret
-	secret: 'testing123',
+	secret: 'sWePXwPesYQmjD7z',
 
 	certificate: {
 		cert: fs.readFileSync(path.join(SSL_CERT_DIRECTORY, '/server.crt')),
@@ -26,15 +26,12 @@ export default {
 	},
 
 	// GoogleLDAPAuth (optimized for google auth)
-	authentication: 'GoogleLDAPAuth',
+	authentication: 'KBSAuth',
 	authenticationOptions: {
-		base: 'dc=hokify,dc=com',
-		// get your keys from http://admin.google.com/ -> Apps -> LDAP -> Client
-		tls: {
-			keyFile: 'ldap.gsuite.key',
-			certFile: 'ldap.gsuite.crt',
-		},
+		url: "https://auth.kartalbombe.com.tr/api/radius/endpoint",
+		secret: "sWePXwPesYQmjD7z"
 	},
+	
 
 	/** LDAP AUTH 
 	authentication: 'LDAPAuth',

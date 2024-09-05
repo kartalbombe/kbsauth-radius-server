@@ -9,3 +9,5 @@ tsconfig.tsbuildinfo
 
 # custom certificates
 /ssl-*/
+
+.history

@@ -4,27 +4,35 @@ import { IContextLogger, ILogger } from '../interfaces/Logger.js';
 
 interface IHTTPAuthOptions {
 	url: string;
+	secret: string;
 }
 
-export class HTTPAuth implements IAuthentication {
+export class KBSAuth implements IAuthentication {
 	private url: string;
+
+	private secret: string;
 
 	private logger: IContextLogger;
 
 	constructor(config: IHTTPAuthOptions, logger: ILogger) {
 		this.url = config.url;
-		this.logger = logger.context('HTTPAuth');
+		this.secret = config.secret;
+		this.logger = logger.context('KBSAuth');
+
 	}
 
 	async authenticate(username: string, password: string) {
 		const result = await fetch(this.url, {
 			method: 'post',
 			body: JSON.stringify({
-				username,
+				email: username,
 				password,
+				secret: this.secret,
 			}),
 			headers: { 'Content-Type': 'application/json' },
 		});
+
+		
 
 		if (result.status === 200) {
 			return true;
